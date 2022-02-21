@@ -13,5 +13,5 @@ workflows:
           path: .
           profile-name: default
           region: AWS_DEFAULT_REGION
-          repo: circleci-ecr-orb-demo
+          repo: trey_node_api
           tag: "$CIRCLE_SHA1"
