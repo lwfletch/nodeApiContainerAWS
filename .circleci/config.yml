@@ -15,3 +15,9 @@ workflows:
           region: AWS_DEFAULT_REGION
           repo: trey_node_api
           tag: "$CIRCLE_SHA1"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+          family: AWS_ECS_SERVICE
+          cluster-name: AWS_ECS_CLUSTER
+          container-image-name-updates: "container=${AWS_ECS_SERVICE},tag=${CIRCLE_SHA1}"

@@ -4,7 +4,7 @@ app.use(express.json());
  
  
 app.get('/', (req, res) => {
-   res.send('Welcome to Node API by Trey');
+   res.send('Welcome to my API built in NodeJS by Trey Fletcher');
 });
 
 const port = process.env.PORT || 8081;
