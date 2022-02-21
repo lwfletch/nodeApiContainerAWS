@@ -8,12 +8,10 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: false
+          create-repo: true
           dockerfile: Dockerfile
-          no-output-timeout: 20m
           path: .
           profile-name: default
           region: AWS_DEFAULT_REGION
-          repo: trey-node-api
-          skip-when-tags-exist: false
-          tag: 'latest'
+          repo: circleci-ecr-orb-demo
+          tag: "$CIRCLE_SHA1"
