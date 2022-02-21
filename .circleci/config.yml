@@ -13,7 +13,7 @@ workflows:
           no-output-timeout: 20m
           path: ../Dockerfile
           profile-name: default
-          region: AWS_REGION
+          region: AWS_DEFAULT_REGION
           repo: trey-node-api
           skip-when-tags-exist: false
           tag: 'latest'
