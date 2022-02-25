@@ -5,8 +5,8 @@ workflows:
   build-and-deploy:
     jobs:
       - ecr-ecs/upload-deploy:
-        app_name: "trey_node_api"
-        aws-region: AWS_DEFAULT_REGION
+          app_name: "trey_node_api"
+          aws-region: AWS_DEFAULT_REGION
         
 # version: '2.1'
 # orbs: 
