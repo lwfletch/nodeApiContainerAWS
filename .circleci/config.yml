@@ -1,6 +1,6 @@
 version: '2.1'
-orbs:
-  ecs-ecr: dsi/ecs-ecr@1.1.0
+orbs: 
+  ecr-ecs: dsi/ecr-ecs@3.0.1
 workflows:
   build-and-deploy:
     jobs:
