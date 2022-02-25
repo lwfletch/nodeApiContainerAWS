@@ -1,24 +1,30 @@
 version: '2.1'
-orbs: 
-  aws-ecr: circleci/aws-ecr@7.3.0
-  aws-ecs: circleci/aws-ecs@02.2.1
+orbs:
+  ecs-ecr: dsi/ecs-ecr@1.1.0
 workflows:
-  build_and_push_image:
+  build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
-          dockerfile: Dockerfile
-          path: .
-          profile-name: default
-          region: AWS_DEFAULT_REGION
-          repo: trey_node_api
-          tag: "latest,$CIRCLE_SHA1"
-      # - aws-ecs/deploy-service-update:
-      #     requires:
-      #       - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
-      #     family: "node_api"
-      #     cluster-name: "trey_node_api"
-      #     container-image-name-updates: "container=trey_node_api,tag=${CIRCLE_SHA1}"
+      - ecr-ecs/upload-deploy:
+        app_name: trey_node_api
+        environment: dev
+        verify_app_deployed: true
+        aws-region: us-east-1
+        
+# version: '2.1'
+# orbs: 
+#   aws-ecr: circleci/aws-ecr@7.3.0
+#   aws-ecs: circleci/aws-ecs@02.2.1
+# workflows:
+#   build_and_push_image:
+#     jobs:
+#       - aws-ecr/build-and-push-image:
+#           account-url: AWS_ECR_ACCOUNT_URL
+#           aws-access-key-id: AWS_ACCESS_KEY_ID
+#           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+#           create-repo: true
+#           dockerfile: Dockerfile
+#           path: .
+#           profile-name: default
+#           region: AWS_DEFAULT_REGION
+#           repo: trey_node_api
+#           tag: "latest,$CIRCLE_SHA1"
