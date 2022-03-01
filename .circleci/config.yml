@@ -5,7 +5,7 @@ orbs:
 workflows:
   build_and_push_staging:
     jobs:
-      - aws-ecr/build-and-push-image-sandbox:
+      - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL_SANDBOX
           aws-access-key-id: AWS_ACCESS_KEY_ID_SANDBOX
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY_SANDBOX
