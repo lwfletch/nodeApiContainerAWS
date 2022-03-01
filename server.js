@@ -15,5 +15,9 @@ app.get('/edgesource', (req, res) => {
    res.send('Give a warm welcome to the guys.');
 });
 
+app.get('/healthcheck', (req, res) => {
+   res.send('API is alive and well.');
+});
+
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
