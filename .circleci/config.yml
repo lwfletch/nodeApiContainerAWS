@@ -1,28 +1,24 @@
 version: '2.1'
 orbs: 
-  ecr-ecs: dsi/ecr-ecs@3.0.1
+  aws-ecr: circleci/aws-ecr@7.3.0
+  aws-ecs: circleci/aws-ecs@02.2.1
 workflows:
-  build-and-deploy:
+  build_and_push_staging:
     jobs:
-      - ecr-ecs/upload-deploy:
-          app_name: "trey_node_api"
-          aws-region: AWS_DEFAULT_REGION
-        
-# version: '2.1'
-# orbs: 
-#   aws-ecr: circleci/aws-ecr@7.3.0
-#   aws-ecs: circleci/aws-ecs@02.2.1
-# workflows:
-#   build_and_push_image:
-#     jobs:
-#       - aws-ecr/build-and-push-image:
-#           account-url: AWS_ECR_ACCOUNT_URL
-#           aws-access-key-id: AWS_ACCESS_KEY_ID
-#           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-#           create-repo: true
-#           dockerfile: Dockerfile
-#           path: .
-#           profile-name: default
-#           region: AWS_DEFAULT_REGION
-#           repo: trey_node_api
-#           tag: "latest,$CIRCLE_SHA1"
+      - aws-ecr/build-and-push-image-sandbox:
+          account-url: AWS_ECR_ACCOUNT_URL_SANDBOX
+          aws-access-key-id: AWS_ACCESS_KEY_ID_SANDBOX
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_SANDBOX
+          create-repo: true
+          dockerfile: Dockerfile
+          path: .
+          profile-name: default
+          region: AWS_DEFAULT_REGION
+          repo: trey-node-api-sandbox
+          tag: "latest,$CIRCLE_SHA1"
+      # - aws-ecs/deploy-service-update:
+      #     requires:
+      #       - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+      #     family: "node_api"
+      #     cluster-name: "trey_node_api"
+      #     container-image-name-updates: "container=tf-node-api,tag=${CIRCLE_SHA1}"
