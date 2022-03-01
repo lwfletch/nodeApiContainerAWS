@@ -19,24 +19,24 @@ workflows:
   build_and_push_develop:
     jobs:
       - aws-ecr/build-and-push-image:
-      build:
-        filters:
-          branches:
-            only:
-              - develop
-      account-url: AWS_ECR_ACCOUNT_URL
-      aws-access-key-id: AWS_ACCESS_KEY_ID
-      aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      create-repo: true
-      dockerfile: Dockerfile
-      path: .
-      profile-name: default
-      region: AWS_DEFAULT_REGION
-      repo: trey_node_api
-      tag: "latest,$CIRCLE_SHA1"
-      # - aws-ecs/deploy-service-update:
-      #     requires:
-      #       - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
-      #     family: "node_api"
-      #     cluster-name: "trey_node_api"
-      #     container-image-name-updates: "container=tf-node-api,tag=${CIRCLE_SHA1}"
+          build:
+            filters:
+              branches:
+                only:
+                  - develop
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: Dockerfile
+          path: .
+          profile-name: default
+          region: AWS_DEFAULT_REGION
+          repo: trey_node_api
+          tag: "latest,$CIRCLE_SHA1"
+        # - aws-ecs/deploy-service-update:
+        #     requires:
+        #       - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+        #     family: "node_api"
+        #     cluster-name: "trey_node_api"
+        #     container-image-name-updates: "container=tf-node-api,tag=${CIRCLE_SHA1}"
