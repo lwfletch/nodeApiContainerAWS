@@ -1,10 +1,22 @@
 const express = require('express');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(express.json());
- 
- 
+require('dotenv').config()
+
+const uri = process.env.MONGO_CONNECTION;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
 app.get('/', (req, res) => {
-   res.send('Welcome to my API built in NodeJS by Trey Fletcher');
+   client.connect(err => {
+      if(err) throw err;
+      const collection = client.db("myDb").collection("users");        
+      collection.find().toArray(function(err, users) {
+         if(err) throw err;    
+         res.send(JSON.stringify(users))
+         client.close();           
+      });
+    }); 
 });
 
 app.get('/freddy', (req, res) => {
