@@ -1,0 +1,16 @@
+{
+    "serviceName": "lwfletch-node-api",
+    "taskDefinition": "lwfletch-node-api-task",
+    "networkConfiguration": {
+      "awsvpcConfiguration": {
+        "securityGroups": [
+          "sg-841f3efb"
+        ],
+        "subnets": [
+          "subnet-f077a5b8",
+          "subnet-356c3150"
+        ]
+      }
+    },
+    "desiredCount": 1
+  }

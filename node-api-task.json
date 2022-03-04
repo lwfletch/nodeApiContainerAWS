@@ -1,0 +1,24 @@
+{
+    "family": "trey-fargate", 
+    "networkMode": "awsvpc", 
+    "containerDefinitions": [
+        {
+            "name": "trey-node-api", 
+            "image": "752436870060.dkr.ecr.us-east-1.amazonaws.com/trey_node_api:latest", 
+            "portMappings": [
+                {
+                    "containerPort": 8081, 
+                    "hostPort": 8081, 
+                    "protocol": "tcp"
+                }
+            ], 
+            "essential": true
+        }
+    ], 
+    "requiresCompatibilities": [
+        "FARGATE"
+    ], 
+    "executionRoleArn": "arn:aws:iam::752436870060:role/ecsTaskExecutionRole_trey",
+    "cpu": "256", 
+    "memory": "512"
+}
